@@ -1,8 +1,8 @@
 package service
 
 import (
-	"golang-crud-gin/data/request/request"
-	"golang-crud-gin/data/request/response"
+	"golang-crud-gin/data/request"
+	"golang-crud-gin/data/response"
 )
 
 type TagsService interface {

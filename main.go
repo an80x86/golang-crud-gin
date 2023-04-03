@@ -3,6 +3,7 @@ package main
 import (
 	"golang-crud-gin/config"
 	"golang-crud-gin/controller"
+	_ "golang-crud-gin/docs"
 	"golang-crud-gin/helper"
 	"golang-crud-gin/model"
 	"golang-crud-gin/repository"
@@ -14,10 +15,15 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
+// @title 	Tag Service API
+// @version	1.0
+// @description A Tag service API in Go using Gin framework
+
+// @host 	localhost:8888
+// @BasePath /api
 func main() {
 
 	log.Info().Msg("Started Server!")
-
 	// Database
 	db := config.DatabaseConnection()
 	validate := validator.New()
@@ -33,7 +39,7 @@ func main() {
 	// Controller
 	tagsController := controller.NewTagsController(tagsService)
 
-	// router
+	// Router
 	routes := router.NewRouter(tagsController)
 
 	server := &http.Server{

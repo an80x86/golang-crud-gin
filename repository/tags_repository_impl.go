@@ -2,7 +2,7 @@ package repository
 
 import (
 	"errors"
-	"golang-crud-gin/data/request/request"
+	"golang-crud-gin/data/request"
 	"golang-crud-gin/helper"
 	"golang-crud-gin/model"
 

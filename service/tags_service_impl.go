@@ -1,8 +1,8 @@
 package service
 
 import (
-	"golang-crud-gin/data/request/request"
-	"golang-crud-gin/data/request/response"
+	"golang-crud-gin/data/request"
+	"golang-crud-gin/data/response"
 	"golang-crud-gin/helper"
 	"golang-crud-gin/model"
 	"golang-crud-gin/repository"
@@ -12,24 +12,24 @@ import (
 
 type TagsServiceImpl struct {
 	TagsRepository repository.TagsRepository
-	validate       *validator.Validate
+	Validate       *validator.Validate
 }
 
-func NewTagsServiceImpl(tagsRepository repository.TagsRepository, validate *validator.Validate) TagsService {
+func NewTagsServiceImpl(tagRepository repository.TagsRepository, validate *validator.Validate) TagsService {
 	return &TagsServiceImpl{
-		TagsRepository: tagsRepository,
-		validate:       validate,
+		TagsRepository: tagRepository,
+		Validate:       validate,
 	}
 }
 
 // Create implements TagsService
 func (t *TagsServiceImpl) Create(tags request.CreateTagsRequest) {
-	err := t.validate.Struct(tags)
+	err := t.Validate.Struct(tags)
 	helper.ErrorPanic(err)
-	tagsModel := model.Tags{
+	tagModel := model.Tags{
 		Name: tags.Name,
 	}
-	t.TagsRepository.Save(tagsModel)
+	t.TagsRepository.Save(tagModel)
 }
 
 // Delete implements TagsService
@@ -58,12 +58,11 @@ func (t *TagsServiceImpl) FindById(tagsId int) response.TagsResponse {
 	tagData, err := t.TagsRepository.FindById(tagsId)
 	helper.ErrorPanic(err)
 
-	tagsResponse := response.TagsResponse{
+	tagResponse := response.TagsResponse{
 		Id:   tagData.Id,
 		Name: tagData.Name,
 	}
-
-	return tagsResponse
+	return tagResponse
 }
 
 // Update implements TagsService
